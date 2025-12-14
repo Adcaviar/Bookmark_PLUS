@@ -2,7 +2,7 @@
   "name": "wxt-vue-starter",
   "description": "manifest.json description",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.7",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -17,7 +17,8 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "ant-design-vue": "^4.2.6",
-    "vue": "^3.5.21"
+    "vue": "^3.5.21",
+    "webext-options-sync": "^4.3.0"
   },
   "devDependencies": {
     "@wxt-dev/module-vue": "^1.0.2",

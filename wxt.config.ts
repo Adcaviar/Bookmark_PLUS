@@ -4,9 +4,13 @@ import { defineConfig } from 'wxt';
 export default defineConfig({
   modules: ['@wxt-dev/module-vue'],
   manifest: {
-    name: '__MSG_extName__',
-    description: '__MSG_extDescription__',
+    name: "__MSG_extensionName__",
+    description: "__MSG_extensionDescription__",
     default_locale: 'en',
     permissions: ['storage', 'bookmarks', 'notifications'],
-  },
+    host_permissions: ["https://*.github.com/", "https://*.githubusercontent.com/"],
+    optional_host_permissions: [
+      "*://*/*",
+    ]
+  }
 });

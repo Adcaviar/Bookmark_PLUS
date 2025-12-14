@@ -14,7 +14,8 @@
 
 
 # 关于
-- BookMark 书签管理器是一款由 [WXT+VUE](https://wxt.dev/) 所开发的浏览器功能插件
+- 该项目的诞生源于自用的一款浏览器插件 [BookmarkHub](https://github.com/dudor/BookmarkHub)，源项目长时间未维护，因此进行重构，加入个人的一些想法
+- BookMark书签管理器是一款由 [WXT+VUE](https://wxt.dev/) 所开发的浏览器功能插件，源[BookmarkHub](https://github.com/dudor/BookmarkHub)所使用WXT+React
 - 支持的浏览器 Chrome、Firefox、Edge、Safari 以及任何基于 Chromium 内核的浏览器构建扩展程序。
 - 它使用 GitHub 的 Gist 记录来存储浏览器的书签
 
@@ -24,3 +25,13 @@
 - 一键清空本地所以书签
 - 支持跨电脑、跨浏览器同步书签
 - 支持显示本地和远程的书签数量
+
+
+
+
+
+## License
+
+本项目包含部分代码来自 **[BookmarkHub](https://github.com/dudor/BookmarkHub)**
+
+[BookmarkHub](https://github.com/dudor/BookmarkHub) 采用Apache License 2.0许可

@@ -1,36 +1,39 @@
 <template>
   <div class="popup">
-    <a-divider style="margin: 1rem 0 1.5rem 0;height: 1px;">BookMark 书签管理</a-divider>
+    <a-divider style="margin: 1rem 0 1.5rem 0;height: 1px;">BookMark 书签管理器</a-divider>
 
     <!-- 上传书签 -->
-    <a-popconfirm title="Are you sure？" @confirm="confirm('update')" @cancel="cancel('update')">
+    <a-popconfirm :title="browser.i18n.getMessage('confirm_update')" :ok-text="browser.i18n.getMessage('confirm')" :cancel-text="browser.i18n.getMessage('cancel')"
+      @confirm="confirm('upload')" @cancel="cancel">
       <template #icon><question-circle-outlined style="color: red" /></template>
       <a-button type="text" :block="true" class="button">
-        <CloudUploadOutlined />{{ browser.i18n.getMessage('update') }}
+        <CloudUploadOutlined />{{ browser.i18n.getMessage('uploadBookmarks') }}
       </a-button>
     </a-popconfirm>
 
     <!-- 下载书签 -->
-    <a-popconfirm title="Are you sure？" @confirm="confirm('update')" @cancel="cancel('update')">
+    <a-popconfirm :title="browser.i18n.getMessage('confirm_download')" :ok-text="browser.i18n.getMessage('confirm')" :cancel-text="browser.i18n.getMessage('cancel')"
+      @confirm="confirm('download')" @cancel="cancel">
       <template #icon><question-circle-outlined style="color: red" /></template>
       <a-button type="text" :block="true" class="button">
-        <CloudDownloadOutlined />{{ browser.i18n.getMessage('download') }}
+        <CloudDownloadOutlined />{{ browser.i18n.getMessage('downloadBookmarks') }}
       </a-button>
     </a-popconfirm>
 
     <!-- 清空本地书签 -->
-    <a-popconfirm title="Are you sure？" @confirm="confirm('update')" @cancel="cancel('update')">
+    <a-popconfirm :title="browser.i18n.getMessage('confirm_clear')" :ok-text="browser.i18n.getMessage('confirm')" :cancel-text="browser.i18n.getMessage('cancel')"
+      @confirm="confirm('removeAll')" @cancel="cancel">
       <template #icon><question-circle-outlined style="color: red" /></template>
       <a-button type="text" :block="true" class="button">
-        <ClearOutlined />{{ browser.i18n.getMessage('clear') }}
+        <ClearOutlined />{{ browser.i18n.getMessage('removeAllBookmarks') }}
       </a-button>
     </a-popconfirm>
 
     <a-divider class="line" />
 
     <!-- 设置 -->
-    <a-button type="text" :block="true" class="button">
-      <SettingOutlined />{{ browser.i18n.getMessage('setting') }}
+    <a-button type="text" :block="true" class="button" @click="sendMessage('setting')">
+      <SettingOutlined />{{ browser.i18n.getMessage('settings') }}
     </a-button>
 
     <!-- 帮助 -->
@@ -57,28 +60,35 @@ import { message } from 'ant-design-vue';
 const localBookCount = ref(0)   // 本地书签数量
 const CloundBookCount = ref(0)  // 云端书签数量
 
-const confirm = (type:string) => {
+const confirm = (type: string) => {
   sendMessage(type)
-  message.success('Click on Yes');
+  // message.success('Click on Yes');
 };
 
-const cancel = (type:string) => {
-  message.error('Click on No');
+const cancel = () => {
+  // message.error('Click on No');
 };
 
 onMounted(async () => {
-  await getLocalBookMarkCount()
+  let data = await browser.storage.local.get(["localCount", "remoteCount"]);
+  localBookCount.value = data.localCount
+  CloundBookCount.value = data.remoteCount
 })
-
-const getLocalBookMarkCount = async () => {
-  await browser.runtime.sendMessage({ type: 'GetLocalBookCount' })
-  const res = await browser.storage.local.get(["localCount"]);
-  localBookCount.value = res.localCount
-}
 
 const sendMessage = (type: string) => {
   browser.runtime.sendMessage({ type })
 }
+
+browser.runtime.onMessage.addListener((message) => {
+  if (message.type === 'COUNT_UPDATED') {
+    if (message.localCount !== undefined) {
+      localBookCount.value = message.localCount;
+    }
+    if (message.remoteCount !== undefined) {
+      CloundBookCount.value = message.remoteCount;
+    }
+  }
+});
 </script>
 
 <style scoped>
