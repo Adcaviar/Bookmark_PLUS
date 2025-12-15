@@ -71,6 +71,12 @@
 
 * [Other Chromium-based browsers](https://chrome.google.com/webstore/detail/bookmarkhub-sync-bookmark/fohimdklhhcpcnpmmichieidclgfdmol)
 
+  ## CREDITS:
+  Based on original BookmarkHub by dudor (https://github.com/dudor/BookmarkHub)
+  Licensed under Apache License 2.0
+
+  Source code: https://github.com/beny18241/BookmarkHub
+
 ## License
 
 This project contains some code from... **[BookmarkHub](https://github.com/dudor/BookmarkHub)**
